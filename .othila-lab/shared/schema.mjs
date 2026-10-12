@@ -2,8 +2,8 @@
 import { expectData } from '@othila-academy/lab';
 
 // Le type nommé par introspection : sa sorte (OBJECT, ENUM, INTERFACE, UNION…), ses champs (dépréciés compris)
-// et leurs arguments, ses valeurs d'énumération, les interfaces qu'il implémente et ses types possibles ;
-// null s'il n'existe pas.
+// et leurs arguments, ses champs d'input, ses valeurs d'énumération, les interfaces qu'il implémente
+// et ses types possibles ; null s'il n'existe pas.
 export async function typeOf(gql, name) {
   const result = await gql(
     `query ($name: String!) {
@@ -12,6 +12,7 @@ export async function typeOf(gql, name) {
          fields(includeDeprecated: true) {
            name isDeprecated deprecationReason type { ...T } args { name type { ...T } }
          }
+         inputFields { name type { ...T } }
          enumValues { name }
          interfaces { name }
          possibleTypes { name }
@@ -30,7 +31,9 @@ export function sdl(type) {
   return type.name;
 }
 
-export const fieldOf = (type, name) => type?.fields?.find((f) => f.name === name) ?? null;
+// Un champ d'un type objet, ou d'un input.
+export const fieldOf = (type, name) =>
+  (type?.fields ?? type?.inputFields)?.find((f) => f.name === name) ?? null;
 
 export const argOf = (field, name) => field?.args?.find((a) => a.name === name) ?? null;
 

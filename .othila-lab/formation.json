@@ -9,6 +9,10 @@
     {
       "title": "Séance 2 - Schéma avancé et relations",
       "labs": ["enum-categorie", "participants", "interface-node", "union-search", "deprecation"]
+    },
+    {
+      "title": "Séance 3 - Mutations, sécurité, client",
+      "labs": ["mutations"]
     }
   ],
   "server": "packages/server-js/src/server.js",

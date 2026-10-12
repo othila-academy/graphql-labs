@@ -15,6 +15,11 @@ export function schemaError(message) {
   const spread = /objects of type "(\w+)" can never be of type "(\w+)"/.exec(message);
   if (spread)
     return `Pour le schéma, un ${spread[1]} ne peut jamais être un ${spread[2]} : le champ renvoie-t-il une interface que ${spread[2]} implémente, ou une union qui le contient ?`;
+  if (/Schema is not configured to execute mutation/.test(message))
+    return "Le schéma n'a pas de type Mutation : où se déclarent les opérations qui modifient les données ?";
+  const type = /Unknown type "(\w+)"/.exec(message);
+  if (type)
+    return `Le schéma n'a pas de type ${type[1]} : l'as-tu déclaré, et as-tu relancé ton serveur ?`;
   const abstract = /Abstract type "(\w+)" must resolve to an Object type/.exec(message);
   if (abstract)
     return `${abstract[1]} ne sait pas quel type concret porte chaque objet : qui le dit à GraphQL, et est-il réuni dans resolvers/index.js ?`;
