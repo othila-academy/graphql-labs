@@ -1,6 +1,9 @@
+import bcrypt from 'bcryptjs';
 import { GraphQLError } from 'graphql';
+import { sign } from '../auth/jwt.js';
 import { events } from '../data/events.js';
 import { registrations } from '../data/registrations.js';
+import { users } from '../data/users.js';
 
 // Une erreur métier porte un code que le client sait traiter, en plus du message.
 const notFound = (id) =>
@@ -16,6 +19,13 @@ function findEvent(id) {
 }
 
 export const Mutation = {
+  // Le même refus que l'email existe ou non : on ne révèle pas qui est inscrit.
+  login: async (_parent, { email, password }) => {
+    const user = users.find((u) => u.email === email);
+    if (!user || !(await bcrypt.compare(password, user.passwordHash)))
+      throw new GraphQLError('identifiants invalides', { extensions: { code: 'UNAUTHENTICATED' } });
+    return { token: sign(user), user };
+  },
   createEvent: (_parent, { input }) => {
     if (!input.title.trim()) throw badInput('le titre ne peut pas être vide');
     const event = { id: nextId(), ...input, end: input.end ?? input.start };

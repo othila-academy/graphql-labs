@@ -11,6 +11,7 @@ export const Query = {
   // Les identifiants sont uniques dans tout le graphe : on cherche dans les deux tableaux.
   node: (_parent, { id }) =>
     events.find((event) => event.id === id) ?? users.find((user) => user.id === id) ?? null,
+  me: (_parent, _args, { user }) => user,
   search: (_parent, { text }) => {
     const needle = text.trim().toLowerCase();
     if (!needle) return [];

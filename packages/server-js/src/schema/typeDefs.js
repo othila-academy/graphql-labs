@@ -7,6 +7,11 @@ export const typeDefs = /* GraphQL */ `
     SOIREE
   }
 
+  enum Role {
+    MEMBER
+    ADMIN
+  }
+
   interface Node {
     id: ID!
   }
@@ -14,6 +19,8 @@ export const typeDefs = /* GraphQL */ `
   type User implements Node {
     id: ID!
     name: String!
+    email: String!
+    role: Role!
     organizedEvents: [Event!]!
     participations: [Event!]!
   }
@@ -34,6 +41,11 @@ export const typeDefs = /* GraphQL */ `
     participantsCount: Int!
   }
 
+  type AuthPayload {
+    token: String!
+    user: User!
+  }
+
   union SearchResult = User | Event
 
   type Query {
@@ -44,6 +56,8 @@ export const typeDefs = /* GraphQL */ `
     user(id: ID!): User
     node(id: ID!): Node
     search(text: String!): [SearchResult!]!
+    "L'utilisateur connecté, ou null."
+    me: User
   }
 
   input CreateEventInput {
@@ -68,5 +82,6 @@ export const typeDefs = /* GraphQL */ `
     updateEvent(id: ID!, input: UpdateEventInput!): Event!
     "Renvoie l'id de l'évènement supprimé."
     deleteEvent(id: ID!): ID!
+    login(email: String!, password: String!): AuthPayload!
   }
 `;
