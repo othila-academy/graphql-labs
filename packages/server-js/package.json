@@ -1,0 +1,15 @@
+{
+  "name": "server-js",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node src/server.js"
+  },
+  "author": "Quentin NICOLLE <quentin.nicolle@othila-academy.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^5.5.1",
+    "graphql": "^16.11.0"
+  }
+}

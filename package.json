@@ -7,7 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "lab": "lab"
+    "lab": "lab",
+    "start:server-js": "npm run dev --workspace server-js",
+    "smoke": "node scripts/smoke.mjs"
   },
   "license": "MIT",
   "devDependencies": {
