@@ -1,5 +1,5 @@
 export const resolvers = {
-    Query: {
-        hello: () => 'Bonjour GraphQL'
-    }
+  Query: {
+    hello: () => 'Bonjour GraphQL'
+  }
 };

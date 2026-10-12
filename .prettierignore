@@ -1,0 +1,4 @@
+# Les textes du cours restent tels qu'ils sont écrits ; le lockfile appartient à npm.
+*.md
+package-lock.json
+.othila-lab/local

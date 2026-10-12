@@ -9,10 +9,13 @@
   "scripts": {
     "lab": "lab",
     "start:server-js": "npm run dev --workspace server-js",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "license": "MIT",
   "devDependencies": {
-    "@othila-academy/lab": "0.8.0"
+    "@othila-academy/lab": "0.8.0",
+    "prettier": "3.9.10"
   }
 }
