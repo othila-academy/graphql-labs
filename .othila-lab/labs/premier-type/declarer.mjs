@@ -1,5 +1,5 @@
 import { assert } from '@othila-academy/lab';
-import { fieldOf, sdl, typeOf } from './shared.mjs';
+import { fieldOf, sdl, typeOf } from '../../shared/schema.mjs';
 
 export const title = 'Déclarer le type';
 export const instructions = `Ton serveur ne connaît que hello. Déclare dans le schéma un type Event avec un identifiant,

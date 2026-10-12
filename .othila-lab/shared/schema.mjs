@@ -1,3 +1,4 @@
+// Lecture du schéma par introspection, partagée par les labs du cours.
 import { expectData } from '@othila-academy/lab';
 
 // Le type nommé et ses champs, par introspection ; null s'il n'existe pas.
