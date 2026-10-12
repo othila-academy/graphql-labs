@@ -17,5 +17,7 @@ export const typeDefs = /* GraphQL */ `
     hello: String!
     events: [Event!]!
     users: [User!]!
+    event(id: ID!): Event
+    user(id: ID!): User
   }
 `;
