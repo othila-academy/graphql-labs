@@ -4,7 +4,7 @@
   "seances": [
     {
       "title": "Séance 1 - Fondamentaux et première API GraphQL",
-      "labs": ["premier-type", "organisateur", "arguments"]
+      "labs": ["premier-type", "organisateur", "arguments", "nullabilite"]
     }
   ],
   "server": "packages/server-js/src/server.js",
