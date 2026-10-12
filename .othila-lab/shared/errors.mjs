@@ -14,7 +14,10 @@ export function schemaError(message) {
     return `${required[1]} exige l'argument ${required[2]} (${required[3]}) : une requête sans cet argument doit-elle vraiment être refusée ?`;
   const spread = /objects of type "(\w+)" can never be of type "(\w+)"/.exec(message);
   if (spread)
-    return `Pour le schéma, un ${spread[1]} ne peut jamais être un ${spread[2]} : le champ renvoie-t-il une interface que ${spread[2]} implémente ?`;
+    return `Pour le schéma, un ${spread[1]} ne peut jamais être un ${spread[2]} : le champ renvoie-t-il une interface que ${spread[2]} implémente, ou une union qui le contient ?`;
+  const abstract = /Abstract type "(\w+)" must resolve to an Object type/.exec(message);
+  if (abstract)
+    return `${abstract[1]} ne sait pas quel type concret porte chaque objet : qui le dit à GraphQL, et est-il réuni dans resolvers/index.js ?`;
   return null;
 }
 
