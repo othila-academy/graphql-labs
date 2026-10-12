@@ -45,4 +45,28 @@ export const typeDefs = /* GraphQL */ `
     node(id: ID!): Node
     search(text: String!): [SearchResult!]!
   }
+
+  input CreateEventInput {
+    title: String!
+    start: String!
+    "Facultatif : sans fin, l'évènement dure un jour."
+    end: String
+    category: EventCategory!
+    organizerId: ID!
+  }
+
+  "Tous les champs sont facultatifs : seuls ceux fournis changent."
+  input UpdateEventInput {
+    title: String
+    start: String
+    end: String
+    category: EventCategory
+  }
+
+  type Mutation {
+    createEvent(input: CreateEventInput!): Event!
+    updateEvent(id: ID!, input: UpdateEventInput!): Event!
+    "Renvoie l'id de l'évènement supprimé."
+    deleteEvent(id: ID!): ID!
+  }
 `;
