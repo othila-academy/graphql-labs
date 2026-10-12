@@ -11,6 +11,7 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
     name: String!
     organizedEvents: [Event!]!
+    participations: [Event!]!
   }
 
   type Event {
@@ -19,6 +20,8 @@ export const typeDefs = /* GraphQL */ `
     date: String!
     category: EventCategory!
     organizer: User
+    participants: [User!]!
+    participantsCount: Int!
   }
 
   type Query {
