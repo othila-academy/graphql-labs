@@ -1,10 +1,10 @@
 // Lecture du schéma par introspection, partagée par les labs du cours.
 import { expectData } from '@othila-academy/lab';
 
-// Le type nommé et ses champs, par introspection ; null s'il n'existe pas.
+// Le type nommé, ses champs et leurs arguments, par introspection ; null s'il n'existe pas.
 export async function typeOf(gql, name) {
   const result = await gql(
-    `query ($name: String!) { __type(name: $name) { name fields { name type { ...T } } } }
+    `query ($name: String!) { __type(name: $name) { name fields { name type { ...T } args { name type { ...T } } } } }
      fragment T on __Type { kind name ofType { kind name ofType { kind name ofType { kind name } } } }`,
     { variables: { name } }
   );
@@ -19,3 +19,5 @@ export function sdl(type) {
 }
 
 export const fieldOf = (type, name) => type?.fields?.find((f) => f.name === name) ?? null;
+
+export const argOf = (field, name) => field?.args?.find((a) => a.name === name) ?? null;
