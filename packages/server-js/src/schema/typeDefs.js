@@ -18,10 +18,16 @@ export const typeDefs = /* GraphQL */ `
     participations: [Event!]!
   }
 
+  type DateRange {
+    start: String!
+    end: String!
+  }
+
   type Event implements Node {
     id: ID!
     title: String!
-    date: String!
+    date: String! @deprecated(reason: "Utilise period.start.")
+    period: DateRange!
     category: EventCategory!
     organizer: User
     participants: [User!]!
