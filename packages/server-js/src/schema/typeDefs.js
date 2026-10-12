@@ -28,6 +28,8 @@ export const typeDefs = /* GraphQL */ `
     participantsCount: Int!
   }
 
+  union SearchResult = User | Event
+
   type Query {
     hello: String!
     events(category: EventCategory): [Event!]!
@@ -35,5 +37,6 @@ export const typeDefs = /* GraphQL */ `
     event(id: ID!): Event
     user(id: ID!): User
     node(id: ID!): Node
+    search(text: String!): [SearchResult!]!
   }
 `;
