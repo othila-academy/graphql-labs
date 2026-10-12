@@ -1,5 +1,5 @@
 import { assert, expectData } from '@othila-academy/lab';
-import { nullField, unknownField } from '../../shared/errors.mjs';
+import { nullField, schemaError } from '../../shared/errors.mjs';
 import { fieldOf, sdl, typeOf } from '../../shared/schema.mjs';
 
 export const title = 'Des utilisateurs';
@@ -34,7 +34,7 @@ async function users(gql, { first = false } = {}) {
       `User.${missing} vaut null pour un utilisateur : les noms des propriétés de tes données sont-ils exactement ceux du schéma ?`
     );
   throw new Error(
-    unknownField(error) ?? `users répond « ${error} » : qui a tort, la requête ou le serveur ?`
+    schemaError(error) ?? `users répond « ${error} » : qui a tort, la requête ou le serveur ?`
   );
 }
 

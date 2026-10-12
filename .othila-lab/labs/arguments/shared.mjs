@@ -1,6 +1,6 @@
 // Les checks communs aux deux étapes : un champ racine qui prend un id et renvoie un objet, ou null.
 import { assert } from '@othila-academy/lab';
-import { unknownField } from '../../shared/errors.mjs';
+import { schemaError } from '../../shared/errors.mjs';
 import { argOf, fieldOf, sdl, typeOf } from '../../shared/schema.mjs';
 
 // Query.<field>(id: ID!): <type>, nullable.
@@ -52,7 +52,7 @@ export function absentCheck({ id, field, missing, what }) {
       const error = result.errors?.[0]?.message;
       if (error) {
         throw new Error(
-          unknownField(error) ??
+          schemaError(error) ??
             (explain(error) &&
               `${field}(id: "${missing}") répond « ${error} » : ${explain(error)}`) ??
             `${field}(id: "${missing}") répond par une erreur (« ${error} ») : ${what} absent est-il une erreur, ou une réponse vide ?`
@@ -72,7 +72,7 @@ export async function dataOf(gql, query, label) {
   const error = result.errors?.[0]?.message;
   if (error)
     throw new Error(
-      unknownField(error) ??
+      schemaError(error) ??
         `${label} répond « ${error} » : ${explain(error) ?? 'qui a tort, la requête ou le serveur ?'}`
     );
   return result.data;

@@ -1,5 +1,5 @@
 import { assert } from '@othila-academy/lab';
-import { unknownField } from '../../shared/errors.mjs';
+import { schemaError } from '../../shared/errors.mjs';
 import { fieldOf, sdl, typeOf } from '../../shared/schema.mjs';
 
 export const title = 'Choisir ce que le client perd';
@@ -23,7 +23,7 @@ async function events(gql, { first = false } = {}) {
   const error = result.errors?.[0];
   if (!error) return result.data.events;
   if (!first) throw new Error('events ne répond pas encore : regarde le check liste-entiere.');
-  const unknown = unknownField(error.message);
+  const unknown = schemaError(error.message);
   if (unknown) throw new Error(unknown);
   const path = error.path ? ` (chemin ${error.path.join('.')})` : '';
   throw new Error(

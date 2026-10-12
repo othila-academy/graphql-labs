@@ -5,6 +5,10 @@
     {
       "title": "Séance 1 - Fondamentaux et première API GraphQL",
       "labs": ["premier-type", "organisateur", "arguments", "nullabilite"]
+    },
+    {
+      "title": "Séance 2 - Schéma avancé et relations",
+      "labs": ["enum-categorie"]
     }
   ],
   "server": "packages/server-js/src/server.js",

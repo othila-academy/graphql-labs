@@ -1,5 +1,5 @@
 import { assert } from '@othila-academy/lab';
-import { nullField, unknownField } from '../../shared/errors.mjs';
+import { nullField, schemaError } from '../../shared/errors.mjs';
 import { fieldOf, sdl, typeOf } from '../../shared/schema.mjs';
 
 export const title = 'Relier les évènements à leur organisateur';
@@ -45,7 +45,7 @@ export const checks = [
       const result = await gql('{ events { id organizer { name } } }');
       const error = result.errors?.[0];
       if (error) {
-        const unknown = unknownField(error.message);
+        const unknown = schemaError(error.message);
         if (unknown) throw new Error(unknown);
         // organizer est non nul : un organisateur introuvable fait remonter null jusqu'à data.
         if (nullField(error.message, 'Event') === 'organizer') {

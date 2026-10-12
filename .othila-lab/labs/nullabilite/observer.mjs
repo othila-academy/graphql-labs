@@ -1,5 +1,5 @@
 import { assert } from '@othila-academy/lab';
-import { nullField, unknownField } from '../../shared/errors.mjs';
+import { nullField, schemaError } from '../../shared/errors.mjs';
 
 export const title = 'Un organisateur disparu';
 export const instructions = `Un évènement importé d'une ancienne plateforme référence un organisateur qui n'existe plus.
@@ -29,7 +29,7 @@ export const checks = [
       const error = result.errors?.[0]?.message;
       if (error)
         throw new Error(
-          unknownField(error) ??
+          schemaError(error) ??
             `event(id: "4") répond « ${error} » : qui a tort, la requête ou le serveur ?`
         );
       assert(
@@ -46,7 +46,7 @@ export const checks = [
       const error = result.errors?.[0]?.message;
       // Tant que organizer est User!, l'organisateur introuvable devient cette erreur ; nullable, il vaut null.
       if (error) {
-        assert(!unknownField(error), unknownField(error));
+        assert(!schemaError(error), schemaError(error));
         assert(
           nullField(error, 'Event') === 'organizer',
           `event(id: "4") répond « ${error} » : qui a tort, la requête ou le serveur ?`

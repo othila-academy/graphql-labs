@@ -1,13 +1,17 @@
 // Les erreurs du serveur que les labs du cours traduisent en question pour l'apprenant.
 
-// Un champ, ou un argument, que la requête utilise et que le schéma ne déclare pas : null si ce n'est pas le cas.
-export function unknownField(message) {
+// Une erreur de validation qui vient du schéma (champ ou argument inconnu, argument obligatoire oublié) :
+// la question à poser à l'apprenant, ou null si l'erreur est d'une autre nature.
+export function schemaError(message) {
   const field = /Cannot query field "(\w+)" on type "(\w+)"/.exec(message);
   if (field)
     return `${field[2]} n'a pas de champ ${field[1]} : l'as-tu déclaré dans le schéma, et as-tu relancé ton serveur ?`;
   const arg = /Unknown argument "(\w+)" on field "(\w+\.\w+)"/.exec(message);
   if (arg)
     return `${arg[2]} n'a pas d'argument ${arg[1]} : l'as-tu déclaré dans le schéma, et as-tu relancé ton serveur ?`;
+  const required = /Field "(\w+)" argument "(\w+)" of type "(.+?)" is required/.exec(message);
+  if (required)
+    return `${required[1]} exige l'argument ${required[2]} (${required[3]}) : une requête sans cet argument doit-elle vraiment être refusée ?`;
   return null;
 }
 
