@@ -12,6 +12,9 @@ export function schemaError(message) {
   const required = /Field "(\w+)" argument "(\w+)" of type "(.+?)" is required/.exec(message);
   if (required)
     return `${required[1]} exige l'argument ${required[2]} (${required[3]}) : une requête sans cet argument doit-elle vraiment être refusée ?`;
+  const spread = /objects of type "(\w+)" can never be of type "(\w+)"/.exec(message);
+  if (spread)
+    return `Pour le schéma, un ${spread[1]} ne peut jamais être un ${spread[2]} : le champ renvoie-t-il une interface que ${spread[2]} implémente ?`;
   return null;
 }
 
