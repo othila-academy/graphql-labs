@@ -10,7 +10,7 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
     title: String!
     date: String!
-    organizer: User!
+    organizer: User
   }
 
   type Query {
