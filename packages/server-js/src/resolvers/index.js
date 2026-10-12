@@ -1,5 +1,3 @@
-export const resolvers = {
-  Query: {
-    hello: () => 'Bonjour GraphQL'
-  }
-};
+import { Query } from './query.js';
+
+export const resolvers = { Query };
