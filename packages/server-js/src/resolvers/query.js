@@ -1,4 +1,5 @@
 import { events } from '../data/events.js';
+import { registrations } from '../data/registrations.js';
 import { users } from '../data/users.js';
 
 export const Query = {
@@ -12,6 +13,11 @@ export const Query = {
   node: (_parent, { id }) =>
     events.find((event) => event.id === id) ?? users.find((user) => user.id === id) ?? null,
   me: (_parent, _args, { user }) => user,
+  stats: () => ({
+    eventsCount: events.length,
+    usersCount: users.length,
+    registrationsCount: registrations.length
+  }),
   search: (_parent, { text }) => {
     const needle = text.trim().toLowerCase();
     if (!needle) return [];

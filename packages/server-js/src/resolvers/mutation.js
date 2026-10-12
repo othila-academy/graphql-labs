@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { GraphQLError } from 'graphql';
-import { requireOwnerOrAdmin, requireUser } from '../auth/guards.js';
+import { requireOwnerOrAdmin } from '../auth/guards.js';
 import { sign } from '../auth/jwt.js';
 import { events } from '../data/events.js';
 import { registrations } from '../data/registrations.js';
@@ -28,7 +28,6 @@ export const Mutation = {
     return { token: sign(user), user };
   },
   createEvent: (_parent, { input }, { user }) => {
-    requireUser(user);
     if (!input.title.trim()) throw badInput('le titre ne peut pas être vide');
     // L'organisateur est l'utilisateur connecté, pas un choix du client.
     const event = { id: nextId(), ...input, end: input.end ?? input.start, organizerId: user.id };
@@ -36,8 +35,8 @@ export const Mutation = {
     return event;
   },
   updateEvent: (_parent, { id, input }, { user }) => {
-    requireUser(user);
-    // On cherche l'évènement avant de vérifier les droits : un id inconnu donne NOT_FOUND à tous.
+    // @auth garantit un utilisateur connecté. On cherche l'évènement avant de vérifier les droits :
+    // un id inconnu donne NOT_FOUND à tous.
     const event = findEvent(id);
     requireOwnerOrAdmin(user, event);
     // Un champ facultatif peut arriver à null explicitement : il finirait dans un champ non nul.
@@ -50,7 +49,6 @@ export const Mutation = {
     return event;
   },
   deleteEvent: (_parent, { id }, { user }) => {
-    requireUser(user);
     const index = events.findIndex((e) => e.id === id);
     if (index === -1) throw notFound(id);
     requireOwnerOrAdmin(user, events[index]);

@@ -7,6 +7,9 @@ export const typeDefs = /* GraphQL */ `
     SOIREE
   }
 
+  "Réserve un champ aux utilisateurs connectés ; requires: ADMIN le réserve aux administrateurs."
+  directive @auth(requires: Role = MEMBER) on FIELD_DEFINITION
+
   enum Role {
     MEMBER
     ADMIN
@@ -41,6 +44,12 @@ export const typeDefs = /* GraphQL */ `
     participantsCount: Int!
   }
 
+  type Stats {
+    eventsCount: Int!
+    usersCount: Int!
+    registrationsCount: Int!
+  }
+
   type AuthPayload {
     token: String!
     user: User!
@@ -56,8 +65,9 @@ export const typeDefs = /* GraphQL */ `
     user(id: ID!): User
     node(id: ID!): Node
     search(text: String!): [SearchResult!]!
-    "L'utilisateur connecté, ou null."
-    me: User
+    "L'utilisateur connecté."
+    me: User @auth
+    stats: Stats! @auth(requires: ADMIN)
   }
 
   input CreateEventInput {
@@ -77,10 +87,10 @@ export const typeDefs = /* GraphQL */ `
   }
 
   type Mutation {
-    createEvent(input: CreateEventInput!): Event!
-    updateEvent(id: ID!, input: UpdateEventInput!): Event!
+    createEvent(input: CreateEventInput!): Event! @auth
+    updateEvent(id: ID!, input: UpdateEventInput!): Event! @auth
     "Renvoie l'id de l'évènement supprimé."
-    deleteEvent(id: ID!): ID!
+    deleteEvent(id: ID!): ID! @auth
     login(email: String!, password: String!): AuthPayload!
   }
 `;

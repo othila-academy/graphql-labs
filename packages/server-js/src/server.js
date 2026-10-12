@@ -1,11 +1,16 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import { userFromHeader } from './auth/jwt.js';
+import { authDirective } from './directives/auth.js';
 import { resolvers } from './resolvers/index.js';
 import { typeDefs } from './schema/typeDefs.js';
 
+// Le schéma exécutable, puis le transformateur qui applique @auth.
+const schema = authDirective(makeExecutableSchema({ typeDefs, resolvers }));
+
 // Les erreurs gardent leur code, mais plus la pile d'appels du serveur.
-const server = new ApolloServer({ typeDefs, resolvers, includeStacktraceInErrorResponses: false });
+const server = new ApolloServer({ schema, includeStacktraceInErrorResponses: false });
 
 // PORT: lab replay lance plusieurs serveurs côte à côte ; 4000 par défaut
 const { url } = await startStandaloneServer(server, {
