@@ -1,0 +1,16 @@
+{
+  "name": "graphql-course",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Cours GraphQL Othila Academy : un projet fil rouge construit lab après lab",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "lab": "lab"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@othila-academy/lab": "0.8.0"
+  }
+}

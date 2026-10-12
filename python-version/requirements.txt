@@ -1,4 +1,0 @@
-Flask==2.3.3
-graphene==2.1.9
-graphql-core==2.3.2
-flask-graphql==2.0.1
