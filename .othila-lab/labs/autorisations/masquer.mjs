@@ -1,6 +1,6 @@
 import { assert } from '@othila-academy/lab';
 import { codeOf, codeText, session } from '../../shared/auth.mjs';
-import { UPDATE } from './shared.mjs';
+import { UPDATE } from '../../shared/probes.mjs';
 
 export const title = 'Ne rien trahir';
 export const instructions = `Provoque une erreur (updateEvent sur un id inconnu) et regarde la réponse :

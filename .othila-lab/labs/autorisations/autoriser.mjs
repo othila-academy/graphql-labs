@@ -2,7 +2,7 @@ import { assert } from '@othila-academy/lab';
 import { codeOf, codeText, session } from '../../shared/auth.mjs';
 import { schemaError } from '../../shared/errors.mjs';
 import { dataOf } from '../../shared/query.mjs';
-import { DELETE, UPDATE, cleanup, createAs } from './shared.mjs';
+import { DELETE, UPDATE, cleanup, createAs } from '../../shared/probes.mjs';
 
 export const title = 'Chacun ses évènements';
 export const instructions = `Bilal ne doit pas modifier l'évènement d'Alice. updateEvent et deleteEvent ne sont permis

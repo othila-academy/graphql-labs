@@ -12,7 +12,7 @@
     },
     {
       "title": "Séance 3 - Mutations, sécurité, client",
-      "labs": ["mutations", "login-jwt", "autorisations"]
+      "labs": ["mutations", "login-jwt", "autorisations", "directive-auth"]
     }
   ],
   "server": "packages/server-js/src/server.js",

@@ -3,7 +3,7 @@ import { codeOf, codeText, session } from '../../shared/auth.mjs';
 import { schemaError } from '../../shared/errors.mjs';
 import { dataOf } from '../../shared/query.mjs';
 import { fieldOf, typeOf } from '../../shared/schema.mjs';
-import { CREATE, cleanup, eventInput } from './shared.mjs';
+import { CREATE, cleanup, eventInput } from '../../shared/probes.mjs';
 
 export const title = 'Pas de modification sans connexion';
 export const instructions = `N'importe qui peut encore créer un évènement. Exige une connexion pour createEvent, updateEvent

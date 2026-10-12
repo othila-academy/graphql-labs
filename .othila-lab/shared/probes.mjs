@@ -1,6 +1,6 @@
 // Les évènements de test : créés par une session, avec un input qui s'adapte au schéma de l'étudiant.
-import { schemaError } from '../../shared/errors.mjs';
-import { typeOf, fieldOf } from '../../shared/schema.mjs';
+import { schemaError } from './errors.mjs';
+import { typeOf, fieldOf } from './schema.mjs';
 
 export const FIELDS = 'id title organizer { id name }';
 export const CREATE = `mutation ($input: CreateEventInput!) { createEvent(input: $input) { ${FIELDS} } }`;
@@ -26,7 +26,7 @@ export async function createAs(session) {
   if (error)
     throw new Error(
       schemaError(error) ??
-        `${session.user.name}, connecté, ne peut pas créer d'évènement (« ${error} ») : regarde l'étape authentifier.`
+        `${session.user.name}, connecté, ne peut pas créer d'évènement (« ${error} ») : createEvent doit marcher pour un utilisateur connecté.`
     );
   return result.data.createEvent;
 }
