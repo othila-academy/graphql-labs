@@ -7,14 +7,18 @@ export const typeDefs = /* GraphQL */ `
     SOIREE
   }
 
-  type User {
+  interface Node {
+    id: ID!
+  }
+
+  type User implements Node {
     id: ID!
     name: String!
     organizedEvents: [Event!]!
     participations: [Event!]!
   }
 
-  type Event {
+  type Event implements Node {
     id: ID!
     title: String!
     date: String!
@@ -30,5 +34,6 @@ export const typeDefs = /* GraphQL */ `
     users: [User!]!
     event(id: ID!): Event
     user(id: ID!): User
+    node(id: ID!): Node
   }
 `;

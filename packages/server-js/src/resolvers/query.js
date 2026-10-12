@@ -7,5 +7,8 @@ export const Query = {
     category ? events.filter((event) => event.category === category) : events,
   users: () => users,
   event: (_parent, { id }) => events.find((event) => event.id === id) ?? null,
-  user: (_parent, { id }) => users.find((user) => user.id === id) ?? null
+  user: (_parent, { id }) => users.find((user) => user.id === id) ?? null,
+  // Les identifiants sont uniques dans tout le graphe : on cherche dans les deux tableaux.
+  node: (_parent, { id }) =>
+    events.find((event) => event.id === id) ?? users.find((user) => user.id === id) ?? null
 };
