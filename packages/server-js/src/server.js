@@ -4,7 +4,8 @@ import { userFromHeader } from './auth/jwt.js';
 import { resolvers } from './resolvers/index.js';
 import { typeDefs } from './schema/typeDefs.js';
 
-const server = new ApolloServer({ typeDefs, resolvers });
+// Les erreurs gardent leur code, mais plus la pile d'appels du serveur.
+const server = new ApolloServer({ typeDefs, resolvers, includeStacktraceInErrorResponses: false });
 
 // PORT: lab replay lance plusieurs serveurs côte à côte ; 4000 par défaut
 const { url } = await startStandaloneServer(server, {

@@ -66,7 +66,6 @@ export const typeDefs = /* GraphQL */ `
     "Facultatif : sans fin, l'évènement dure un jour."
     end: String
     category: EventCategory!
-    organizerId: ID!
   }
 
   "Tous les champs sont facultatifs : seuls ceux fournis changent."
