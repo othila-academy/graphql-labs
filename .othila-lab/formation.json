@@ -8,7 +8,7 @@
     },
     {
       "title": "Séance 2 - Schéma avancé et relations",
-      "labs": ["enum-categorie", "participants", "interface-node", "union-search"]
+      "labs": ["enum-categorie", "participants", "interface-node", "union-search", "deprecation"]
     }
   ],
   "server": "packages/server-js/src/server.js",

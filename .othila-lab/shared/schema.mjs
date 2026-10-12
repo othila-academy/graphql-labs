@@ -1,14 +1,17 @@
 // Lecture du schéma par introspection, partagée par les labs du cours.
 import { expectData } from '@othila-academy/lab';
 
-// Le type nommé par introspection : sa sorte (OBJECT, ENUM, INTERFACE, UNION…), ses champs et leurs arguments,
-// ses valeurs d'énumération, les interfaces qu'il implémente et ses types possibles ; null s'il n'existe pas.
+// Le type nommé par introspection : sa sorte (OBJECT, ENUM, INTERFACE, UNION…), ses champs (dépréciés compris)
+// et leurs arguments, ses valeurs d'énumération, les interfaces qu'il implémente et ses types possibles ;
+// null s'il n'existe pas.
 export async function typeOf(gql, name) {
   const result = await gql(
     `query ($name: String!) {
        __type(name: $name) {
          name kind
-         fields { name type { ...T } args { name type { ...T } } }
+         fields(includeDeprecated: true) {
+           name isDeprecated deprecationReason type { ...T } args { name type { ...T } }
+         }
          enumValues { name }
          interfaces { name }
          possibleTypes { name }
