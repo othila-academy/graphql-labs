@@ -1,5 +1,6 @@
 import { GraphQLError } from 'graphql';
 import { events } from '../data/events.js';
+import { repository } from '../data/repository.js';
 import { registrations } from '../data/registrations.js';
 import { users } from '../data/users.js';
 
@@ -7,8 +8,10 @@ import { users } from '../data/users.js';
 const MAX_LIMIT = 50;
 
 // Le filtre s'applique avant le découpage, et eventsCount compte la même liste.
-const filtered = (category) =>
-  category ? events.filter((event) => event.category === category) : events;
+const filtered = (category) => {
+  const all = repository.listEvents();
+  return category ? all.filter((event) => event.category === category) : all;
+};
 
 export const Query = {
   hello: () => 'Bonjour GraphQL',
@@ -21,7 +24,7 @@ export const Query = {
   },
   eventsCount: (_parent, { category }) => filtered(category).length,
   users: () => users,
-  event: (_parent, { id }) => events.find((event) => event.id === id) ?? null,
+  event: (_parent, { id }) => repository.findEventById(id),
   user: (_parent, { id }) => users.find((user) => user.id === id) ?? null,
   // Les identifiants sont uniques dans tout le graphe : on cherche dans les deux tableaux.
   node: (_parent, { id }) =>

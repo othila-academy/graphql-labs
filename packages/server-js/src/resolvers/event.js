@@ -1,16 +1,14 @@
-import { registrations } from '../data/registrations.js';
-import { users } from '../data/users.js';
-
-const registrationsOf = (event) => registrations.filter((r) => r.eventId === event.id);
+import { repository } from '../data/repository.js';
 
 // Le parent est l'évènement : il ne connaît que organizerId, le résolveur trouve l'utilisateur.
 export const Event = {
-  organizer: (event) => users.find((user) => user.id === event.organizerId),
+  // Le loader de la requête regroupe les organisateurs de toute la liste en un seul accès.
+  organizer: (event, _args, { loaders }) => loaders.userById.load(event.organizerId),
   period: (event) => ({ start: event.start, end: event.end }),
   // Déprécié : les clients qui le demandent encore reçoivent le début de la période.
   date: (event) => event.start,
   participants: (event) =>
-    registrationsOf(event).map((r) => users.find((user) => user.id === r.userId)),
+    repository.registrationsOfEvent(event.id).map((r) => repository.findUserById(r.userId)),
   // Un champ calculé : il n'existe pas dans les données.
-  participantsCount: (event) => registrationsOf(event).length
+  participantsCount: (event) => repository.registrationsOfEvent(event.id).length
 };
