@@ -13,10 +13,11 @@
     },
     {
       "title": "Séance 3 - Mutations, sécurité, client",
-      "labs": ["mutations", "login-jwt", "autorisations", "directive-auth"]
+      "labs": ["mutations", "login-jwt", "autorisations", "directive-auth", "client-apollo"]
     }
   ],
   "server": "packages/server-js/src/server.js",
   "graphql": "http://localhost:4000/graphql",
+  "client": { "dir": "packages/client-react", "setup": ".othila-lab/shared/client-setup.js" },
   "endpoint": "https://lab.othila-academy.com"
 }
