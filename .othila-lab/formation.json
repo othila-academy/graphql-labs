@@ -14,6 +14,10 @@
     {
       "title": "Séance 3 - Mutations, sécurité, client",
       "labs": ["mutations", "login-jwt", "autorisations", "directive-auth", "client-apollo"]
+    },
+    {
+      "title": "Séance 4 - Performance et temps réel",
+      "labs": ["pagination"]
     }
   ],
   "server": "packages/server-js/src/server.js",
