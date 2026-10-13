@@ -8,14 +8,17 @@ import { authDirective } from './directives/auth.js';
 import { resolvers } from './resolvers/index.js';
 import { typeDefs } from './schema/typeDefs.js';
 import { repositoryCallsPlugin } from './trace/repositoryCalls.js';
+import { depthLimit } from './validation/depthLimit.js';
 
 // Le schéma exécutable, puis le transformateur qui applique @auth.
 const schema = authDirective(makeExecutableSchema({ typeDefs, resolvers }));
 
-// Les erreurs gardent leur code, mais plus la pile d'appels du serveur ; chaque réponse compte ses accès aux données.
+// Les erreurs gardent leur code, mais plus la pile d'appels du serveur ; chaque réponse compte ses accès aux données ;
+// une requête trop profonde est refusée avant d'être exécutée.
 const server = new ApolloServer({
   schema,
   includeStacktraceInErrorResponses: false,
+  validationRules: [depthLimit()],
   plugins: [repositoryCallsPlugin]
 });
 
