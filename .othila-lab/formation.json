@@ -1,6 +1,7 @@
 {
   "id": "graphql",
   "title": "GraphQL",
+  "lab": "0.9.0",
   "seances": [
     {
       "title": "Séance 1 - Fondamentaux et première API GraphQL",
