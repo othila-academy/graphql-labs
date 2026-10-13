@@ -59,7 +59,10 @@ export const typeDefs = /* GraphQL */ `
 
   type Query {
     hello: String!
-    events(category: EventCategory): [Event!]!
+    "Une page d'évènements : limit entre 1 et 50, offset positif ou nul."
+    events(category: EventCategory, offset: Int = 0, limit: Int = 10): [Event!]!
+    "Le nombre total d'évènements (de la catégorie, si elle est donnée), pour savoir s'il reste des pages."
+    eventsCount(category: EventCategory): Int!
     users: [User!]!
     event(id: ID!): Event
     user(id: ID!): User

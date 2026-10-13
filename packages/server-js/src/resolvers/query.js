@@ -1,11 +1,25 @@
+import { GraphQLError } from 'graphql';
 import { events } from '../data/events.js';
 import { registrations } from '../data/registrations.js';
 import { users } from '../data/users.js';
 
+// Une page ne dépasse jamais MAX_LIMIT évènements : le client ne peut pas tout demander d'un coup.
+const MAX_LIMIT = 50;
+
+// Le filtre s'applique avant le découpage, et eventsCount compte la même liste.
+const filtered = (category) =>
+  category ? events.filter((event) => event.category === category) : events;
+
 export const Query = {
   hello: () => 'Bonjour GraphQL',
-  events: (_parent, { category }) =>
-    category ? events.filter((event) => event.category === category) : events,
+  events: (_parent, { category, offset, limit }) => {
+    if (offset < 0 || limit < 1 || limit > MAX_LIMIT)
+      throw new GraphQLError(`limit entre 1 et ${MAX_LIMIT}, offset positif ou nul`, {
+        extensions: { code: 'BAD_USER_INPUT' }
+      });
+    return filtered(category).slice(offset, offset + limit);
+  },
+  eventsCount: (_parent, { category }) => filtered(category).length,
   users: () => users,
   event: (_parent, { id }) => events.find((event) => event.id === id) ?? null,
   user: (_parent, { id }) => users.find((user) => user.id === id) ?? null,
