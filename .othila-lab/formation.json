@@ -17,7 +17,7 @@
     },
     {
       "title": "Séance 4 - Performance et temps réel",
-      "labs": ["pagination"]
+      "labs": ["pagination", "n1"]
     }
   ],
   "server": "packages/server-js/src/server.js",
