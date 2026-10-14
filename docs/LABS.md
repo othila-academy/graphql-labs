@@ -5,8 +5,8 @@ Le cours GraphQL se joue en labs. Chaque lab te fait construire une partie de to
 ## Au début du cours, une fois
 
 ```bash
-git clone https://github.com/othila-academy/graphql-course.git
-cd graphql-course
+git clone https://github.com/othila-academy/graphql-labs.git
+cd graphql-labs
 npm install
 npx lab join      # le navigateur s'ouvre : code de session, e-mail, prénom ; sans navigateur : npx lab join --terminal
 npx lab init      # crée ta branche my-project, depuis le départ du cours, avec les labs à jour

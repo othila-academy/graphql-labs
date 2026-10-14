@@ -9,8 +9,8 @@ Tout le parcours est dans [`docs/LABS.md`](docs/LABS.md) : cloner, `npm install`
 ## Organisation du dépôt
 
 - `.othila-lab/` : la formation (`formation.json` : séances et ordre des labs) et les labs (`labs/<lab>/`) ; `local/`, ton état, n'est jamais commité.
-- `packages/` : le projet fil rouge (serveur, client), à venir avec le starter.
-- `docs/`, `slides.pdf`, `scripts/` : supports du cours.
+- `packages/` : le projet fil rouge, `server-js` (le serveur GraphQL), et `client-react` (le client, à partir du lab client-apollo).
+- `docs/`,  `scripts/` : supports du cours.
 
 ## La chaîne de labs
 
@@ -18,4 +18,4 @@ Tout le parcours est dans [`docs/LABS.md`](docs/LABS.md) : cloner, `npm install`
 
 ## Les anciennes séances
 
-Les branches de séance (`session-1` à `session-5-final`) et les premiers essais de labs sont archivés sous des tags `archive/*` : `git checkout archive/session-3` pour les consulter. Les tags de palier `s3-*` et `s4-*` sont conservés.
+L'ancienne version du cours, avec ses branches de séance (`session-1` à `session-5-final`), reste consultable dans [othila-academy/graphql-course](https://github.com/othila-academy/graphql-course)
