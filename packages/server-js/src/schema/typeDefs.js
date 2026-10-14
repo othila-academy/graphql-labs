@@ -89,6 +89,11 @@ export const typeDefs = /* GraphQL */ `
     category: EventCategory
   }
 
+  type Subscription {
+    "Un évènement vient d'être créé."
+    eventCreated: Event!
+  }
+
   type Mutation {
     createEvent(input: CreateEventInput!): Event! @auth
     updateEvent(id: ID!, input: UpdateEventInput!): Event! @auth

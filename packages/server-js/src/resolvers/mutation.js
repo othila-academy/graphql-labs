@@ -4,6 +4,7 @@ import { requireOwnerOrAdmin } from '../auth/guards.js';
 import { sign } from '../auth/jwt.js';
 import { events } from '../data/events.js';
 import { registrations } from '../data/registrations.js';
+import { EVENT_CREATED, pubsub } from '../pubsub.js';
 import { users } from '../data/users.js';
 
 // Une erreur métier porte un code que le client sait traiter, en plus du message.
@@ -32,6 +33,8 @@ export const Mutation = {
     // L'organisateur est l'utilisateur connecté, pas un choix du client.
     const event = { id: nextId(), ...input, end: input.end ?? input.start, organizerId: user.id };
     events.push(event);
+    // La clé est le nom du champ de Subscription : l'abonné reçoit { eventCreated: event }.
+    pubsub.publish(EVENT_CREATED, { eventCreated: event });
     return event;
   },
   updateEvent: (_parent, { id, input }, { user }) => {
