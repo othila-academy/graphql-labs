@@ -1,7 +1,7 @@
 {
   "id": "graphql",
   "title": "GraphQL",
-  "lab": "0.9.0",
+  "lab": "0.10.1",
   "seances": [
     {
       "title": "Séance 1 - Fondamentaux et première API GraphQL",
@@ -17,7 +17,7 @@
     },
     {
       "title": "Séance 4 - Performance et temps réel",
-      "labs": ["pagination", "n1", "profondeur"]
+      "labs": ["pagination", "n1", "profondeur", "subscriptions"]
     }
   ],
   "server": "packages/server-js/src/server.js",
