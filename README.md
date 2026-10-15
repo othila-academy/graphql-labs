@@ -4,7 +4,7 @@ Un projet fil rouge, une plateforme d'évènements étudiants, construit **lab a
 
 ## Pour l'apprenant
 
-Tout le parcours est dans [`docs/LABS.md`](docs/LABS.md) : cloner, `npm install`, `npx lab join`, `npx lab init`, puis un lab après l'autre avec `npx lab start`, `check`, `hint` et `submit`. Les nouveaux labs arrivent par `npx lab update`.
+Tout le parcours est dans [`docs/LABS.md`](docs/LABS.md) : cloner, `npm install`, `npx lab join`, `npx lab init`, le tutoriel de la commande (`npx lab start prise-en-main`), puis un lab après l'autre avec `npx lab start`, `check`, `hint` et `submit`. Les nouveaux labs arrivent par `npx lab update`.
 
 ## Organisation du dépôt
 

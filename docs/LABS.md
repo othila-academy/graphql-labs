@@ -11,6 +11,7 @@ npm install
 npx lab join      # le navigateur s'ouvre : code de session, e-mail, prénom ; sans navigateur : npx lab join --terminal
 npx lab init      # crée ta branche my-project, depuis le départ du cours, avec les labs à jour
 npx lab env       # vérifie Node, npm, git et l'accès au serveur othila-lab
+npx lab start prise-en-main   # le tutoriel de la commande lab : 15 min, un petit fichier à réparer, sans serveur
 ```
 
 `npm install` d'abord : sans lui, `npx lab` irait chercher un autre paquet du même nom sur npm.
